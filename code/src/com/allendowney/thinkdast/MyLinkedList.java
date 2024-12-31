@@ -82,7 +82,14 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
-		//TODO: FILL THIS IN!
+		// 동일하게 구현함
+		if (index == 0) {
+      head = new Node(element, head);
+		} else {
+			Node node = getNode(index - 1);
+      node.next = new Node(element, node.next);
+		}
+		size++;
 	}
 
 	@Override
@@ -143,7 +150,15 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object target) {
-		//TODO: FILL THIS IN!
+		if (head != null) {
+			Node node = head;
+			for (int i = 0; i < size; i++) {
+				if (equals(node.data, target)) {
+					return i;
+				}
+				node = node.next;
+			}
+		}
 		return -1;
 	}
 
@@ -208,8 +223,15 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
-		//TODO: FILL THIS IN!
-		return null;
+		E element = get(index);
+		if (index == 0) {
+			head = head.next;
+		} else {
+			Node beforeNode = getNode(index - 1);
+			beforeNode.next = getNode(index).next;
+		}
+		size--;
+		return element;
 	}
 
 	@Override

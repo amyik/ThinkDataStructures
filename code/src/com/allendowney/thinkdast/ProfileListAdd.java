@@ -16,8 +16,8 @@ public class ProfileListAdd {
 	public static void main(String[] args) {
 //		profileArrayListAddEnd();
 //		profileArrayListAddBeginning();
-		profileLinkedListAddBeginning();
-		//profileLinkedListAddEnd();
+//		profileLinkedListAddBeginning();
+		profileLinkedListAddEnd();
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class ProfileListAdd {
 
 			public void timeMe(int n) {
 				for (int i=0; i<n; i++) {
-					list.add("a string");
+					list.add(0, "a string");
 				}
 			}
 		};
@@ -75,7 +75,22 @@ public class ProfileListAdd {
 	 * Characterize the run time of adding to the end of a LinkedList
 	 */
 	public static void profileLinkedListAddEnd() {
-		// TODO: FILL THIS IN!
+		Timeable timeable = new Timeable() {
+			List<String> list;
+
+			public void setup(int n) {
+				list = new LinkedList<String>();
+			}
+
+			public void timeMe(int n) {
+				for (int i=0; i<n; i++) {
+					list.add("a string");
+				}
+			}
+		};
+		int startN = 64000;
+		int endMillis = 1000;
+		runProfiler("LinkedList add end", timeable, startN, endMillis);
 	}
 
 	/**
